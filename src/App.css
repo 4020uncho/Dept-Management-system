@@ -1,10 +1,14 @@
-.header{
-  display:block;
-  width: fit-content;
-  color: red;
-  font: 1em sans-serif;
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 10px;
+  font-family: sans-serif;
 }
-h1,h2,h3,h4{
+
+h1, h2, h3, h4 {
   margin: 0;
   padding: 0;
 }
