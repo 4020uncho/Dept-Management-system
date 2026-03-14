@@ -1,8 +1,11 @@
 import React from 'react'
+import HOD from '../HOD/HOD'
+import { BrowserRouter } from 'react-router-dom'
+import Navbar from '../../components/Navbar/Navbar'
 
 const About = () => {
   return (
-    <div >
+    <div>
         <div className="container mt-4">
 
       <h2 className="text-center mb-4" >
@@ -49,6 +52,7 @@ const About = () => {
 
     </div>
     </div>
+  
   )
 }
 
