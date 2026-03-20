@@ -6,6 +6,7 @@ import About from "./Pages/About/About"
 import Contact from "./Pages/Contact/Contact"
 import Attendence from "./Pages/Attendence/Attendence"
 import HOD from "./Pages/HOD/HOD"
+import FirstSemester from "./Pages/semester/Firstsemester"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path='/hod' element={<HOD/>} />
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/courses' element={<Courses/>}/>
+      <Route path="/courses/firstsemester" element={<FirstSemester/>}/>
       <Route path='/attendence' element={<Attendence/>}/>
       <Route path='*' element={<div>Page not found</div>} />
     </Routes>
