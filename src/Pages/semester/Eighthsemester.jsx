@@ -1,10 +1,9 @@
 import React from 'react'
-import image from '../../assets/semesters/sem1.png'
 import Navbar from '../../components/Navbar/Navbar'
 import Nav1 from '../../components/coursenav/Nav1'
+import image from '../../assets/semesters/sem8.png'
 
-
-const Firstsemester = () => {
+const Eighthsemester = () => {
   return (
     <div>
       <Navbar/>
@@ -12,7 +11,7 @@ const Firstsemester = () => {
     <div className="container">
       <img 
         src={image} 
-        alt="First Semester" 
+        alt="Eighth Semester" 
         style={{ width: '100%', height: 'auto' }}
       />
     </div>
@@ -20,4 +19,4 @@ const Firstsemester = () => {
   )
 }
 
-export default Firstsemester
+export default Eighthsemester

@@ -1,6 +1,8 @@
 import reactLogo from "../../assets/logo.png";
 import Navbar from "../../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
+import frontpage from "../../assets/frontpage/s3.jpg";
+import hod from "../../assets/Hod/hod.png";
 
 const Home = () => {
   return (
@@ -18,6 +20,28 @@ const Home = () => {
 
       {/* Navbar sits below the header */}
       <Navbar />
+
+      <div id="carouselExampleFade" class="carousel slide carousel-fade">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src={frontpage} class="d-block w-100" alt="..."/>
+    </div>
+    <div class="carousel-item">
+      <img src={hod} class="d-block w-100" alt="..."/>
+    </div>
+    <div class="carousel-item">
+      <img src={frontpage} class="d-block w-100" alt="..."/>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
       
 
     </>

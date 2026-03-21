@@ -1,14 +1,15 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
+import coursenav from '../../components/coursenav/Nav1'
+import Nav1 from '../../components/coursenav/Nav1'
 
 const Courses = () => {
   return (
     <div>
       <Navbar/>
-      <navbar>
-          <a className="nav-link" href="/courses/firstsemester">First Semester</a>
-          <a className="nav-link" href="/courses/secondsemester">Second Semester</a>
-      </navbar>
+      <Nav1/>
+
+      
     </div>
   )
 }
