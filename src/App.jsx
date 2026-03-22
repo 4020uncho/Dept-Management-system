@@ -15,7 +15,6 @@ import SixthSemester from "./Pages/semester/Sixthsemester"
 import SeventhSemester from "./Pages/semester/Seventhsemester"
 import EighthSemester from "./Pages/semester/Eighthsemester"
 
-
 function App() {
   return (
     <BrowserRouter>

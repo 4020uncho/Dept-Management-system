@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import './contact.css'
+import Footer from '../../components/footer/Footer'
 
 const Contact = () => {
   const [fullName, setFullName] = React.useState('')

@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import frontpage from "../../assets/frontpage/s3.jpg";
 import hod from "../../assets/Hod/hod.png";
 import Marquee from "../../components/marquee/Marquee";
+import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   return (
@@ -46,10 +47,10 @@ const Home = () => {
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-      
-
+      <Footer/>
     </>
   );
 };
-
-export default Home;
+ 
+export default Home;    
+   
