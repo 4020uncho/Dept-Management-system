@@ -5,14 +5,15 @@ import frontpage from "../../assets/frontpage/s3.jpg";
 import hod from "../../assets/Hod/hod.png";
 import Marquee from "../../components/marquee/Marquee";
 import Footer from "../../components/footer/Footer";
+import HomeCarousel from "../../components/carousel/Homecarousel";
 
 const Home = () => {
   return (
     <>
       {/* Header */}
-      <header className="header">
+      <header className="header" >
         <img src={reactLogo} alt="React Logo" width="100" />
-        <div>
+        <div className="header-text" >
           <a href="https://iost.tu.edu.np/"  target="_blank"  rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <h1 style={{ color: "black", fontSize: "1.8em" }}>Institute of Science and Technology</h1></a>
           <h2 style={{ color: "#cc4400", fontSize: "1em", fontWeight: "normal" }}>Department of IT</h2>
@@ -26,28 +27,9 @@ const Home = () => {
       <Navbar />
       <Marquee/>
 
-      <div id="carouselExampleFade" class="carousel slide carousel-fade">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src={frontpage} class="d-block w-100" alt="..."/>
-    </div>
-    <div class="carousel-item">
-      <img src={hod} class="d-block w-100" alt="..."/>
-    </div>
-    <div class="carousel-item">
-      <img src={frontpage} class="d-block w-100" alt="..."/>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+      <HomeCarousel/>
       <Footer/>
+      <Outlet />
     </>
   );
 };
