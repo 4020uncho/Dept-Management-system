@@ -25,6 +25,8 @@ const Contact = () => {
   }
 
   return (
+    <div>
+      <Navbar/>
   
    <div className="container">
       <h1>Contact Us</h1>
@@ -57,6 +59,8 @@ const Contact = () => {
 
         <input type="submit" value="Submit" />
       </form>
+    </div>
+    <Footer/>
     </div>
   )
 }
