@@ -1,15 +1,16 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import assets from '../../assets/logo.png'
+import Footer from '../../components/footer/Footer'
 
 const About = () => {
   return (
     <div>
       <Navbar />
 
-      <div className="container mt-4">
-
-        <div className="text-center mb-4">
+      <div className="About1">
+        <header className="header" >
+        <div className="Header">
           <img
             src={assets}
             alt="Department Logo"
@@ -17,19 +18,11 @@ const About = () => {
           />
         </div>
 
-        <h2
-          className="text-center mb-3"
-          style={{ color: '#cc4400', fontWeight: 'bold' }}
-        >
-          Department of Information Technology
-        </h2>
-
-        <p
-          className="text-center mb-2"
-          style={{ color: '#555', fontSize: '14px' }}
-        >
-          Central Campus of Technology, Dharan-14, Sunsari
-        </p>
+        <div className="header-text">
+         <h1 style={{color:'blue', font:'bold'}}>Department of IT</h1>
+         <h2 style={{color:'blue', fontSize:'Medium'}}>Central campus of technology</h2>
+        </div>
+        </header>
 
         <p className="text-center mb-4" style={{ color: '#444' }}>
           The Department of Information Technology at Central Campus of Technology
@@ -75,6 +68,7 @@ const About = () => {
         </div>
 
       </div>
+      <Footer/>
     </div>
   )
 }
