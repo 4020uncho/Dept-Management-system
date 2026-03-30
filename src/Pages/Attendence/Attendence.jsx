@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
+import Login from '../../components/login/Login'
 
 const Attendence = () => {
   return (
     <div className="Container">
       <Navbar/>
-      <h1>Attendance</h1>
-      <p>Attendance system under construction. Please check back later for updates!</p>
+      <Login/>
     </div>
   )
 }
