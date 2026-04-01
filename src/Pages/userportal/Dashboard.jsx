@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../assets/logo.png'
+import Griddashboard from '../../components/dashboard/Griddashboard'
 
 const Dashbord = () => {
   return (
@@ -13,6 +14,7 @@ const Dashbord = () => {
           <div className='dashboard-card'>
             <h2>Dashboard</h2>
             <p>Welcome to your dashboard!</p>
+            <Griddashboard />
           </div>
         </div>
       </div>
