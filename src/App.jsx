@@ -15,6 +15,8 @@ import SixthSemester from "./Pages/semester/Sixthsemester"
 import SeventhSemester from "./Pages/semester/Seventhsemester"
 import EighthSemester from "./Pages/semester/Eighthsemester"
 import Dashboard from "./Pages/userportal/Dashboard"
+import Attendance from "./Pages/Attendance/Attendance"
+import Course from "./Pages/course/Course"
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
       <Route path="/courses/eighthsemester" element={<EighthSemester />} />
       <Route path='/studentlogin' element={<Studentlogin/>}/>
       <Route path='/studentlogin/dashboard' element={<Dashboard/>}/>
+      <Route path='/studentlogin/dashboard/attendance' element={<Attendance/>}/>
+      <Route path='/studentlogin/dashboard/course' element={<Course/>}/>
       <Route path='*' element={<div>Page not found</div>} />
     </Routes>
     

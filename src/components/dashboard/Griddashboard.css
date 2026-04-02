@@ -3,10 +3,25 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px;
+  text-decoration: none;
 }
 .dashboard-item {
   background-color: #f0f0f0;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none !important;
 }
+.dashboard-grid a,
+.dashboard-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dashboard-grid a:hover,
+.dashboard-grid a:focus,
+.dashboard-grid a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
