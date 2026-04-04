@@ -1,14 +1,10 @@
 import React from "react";
 import "./Attendance.css";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 
 
 const Attendance = () => {
   return (
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
          <div className="container">
       <h1>Attendance Tracker</h1>
       <p className="subtitle">
@@ -54,11 +50,9 @@ const Attendance = () => {
         </div>
 
        
-        
-      <DateCalendar />
+
       </div>
     </div>
-    </LocalizationProvider>
   );
 };
 
