@@ -30,3 +30,52 @@
 .attendance-table td {
   height: 35px;
 }
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.dropdown {
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown:hover {
+  border-color: #007bff;
+}
+
+.dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+.button {
+  margin-bottom: 24px;
+}
+.button button {
+  border-radius: 18px;
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  background-color: #f4f7ff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 12px;
+}
+.button button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-1px);
+}
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+  margin-top: 12px;
+}
