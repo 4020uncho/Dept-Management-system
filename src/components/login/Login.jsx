@@ -11,33 +11,41 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       alert("Please fill all fields");
       return;
     }
 
-    console.log(formData.email, formData.password);
+    try {
+      const resp = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        }),
+        credentials: "include",
+      });
 
-    const resp = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password
-      })
-    });
+      const data = await resp.json();
 
-    const data = await resp.json();
+      //protected route
+      
 
-    if (data.message === "User logged in successfully") {
+      if (!resp.ok) {
+        alert(data.message || "Login failed");
+        return;
+      }
+
       alert("Login successful");
       navigate("/studentlogin/dashboard");
-    } else {
-      alert("Invalid credentials");
+    } catch (error) {
+      console.error("Login request failed:", error);
+      alert("Unable to send login request. Please try again.");
     }
   };
 
@@ -87,7 +95,7 @@ const Login = () => {
 
 const styles = {
   container: {
-    position: "relative",       // ← parent must be relative
+    position: "relative",      
     height: "100vh",
     width: "100%",
     overflow: "hidden",
@@ -95,12 +103,12 @@ const styles = {
   image: {
     width: "100%",
     height: "100%",
-    objectFit: "cover",         // ← fills the container cleanly
+    objectFit: "cover",        
   },
   form: {
-    position: "absolute",       // ← floats over the image
+    position: "absolute",       
     top: "50%",
-    left:"50%" ,               // ← pinned to the right like your screenshot
+    left:"50%" ,              
     right:"50%",
     transform: "translateY(-50%)",
     padding: "30px",
@@ -120,7 +128,7 @@ const styles = {
     margin: "8px 0",
     borderRadius: "5px",
     border: "1px solid #ccc",
-    boxSizing: "border-box",    // ← prevents input from overflowing
+    boxSizing: "border-box",    
     fontSize: "0.95rem",
   },
   button: {

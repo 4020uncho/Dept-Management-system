@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from '../../assets/logo.png'
 import Griddashboard from '../../components/dashboard/Griddashboard'
 
-const Dashbord = () => {
+const Dashbord =  () => {
+
+ useEffect(() => {
+  const fetchToken = async () => {
+    const token = await cookieStore.get('token');
+    console.log("Token from cookie:", token);
+  };
+
+  fetchToken();
+}, []);
+
   return (
     <div>
       <div className='container'>
