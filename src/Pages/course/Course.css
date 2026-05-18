@@ -19,3 +19,21 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+.button1 {
+  margin-bottom: 24px;
+}
+.button button {
+  border-radius: 18px;
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  background-color: #f4f7ff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 12px;
+}
+.button button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-1px);
+}
