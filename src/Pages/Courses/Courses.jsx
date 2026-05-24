@@ -5,7 +5,6 @@ import Nav1 from '../../components/coursenav/Nav1'
 import Footer from '../../components/footer/Footer'
 import { Outlet } from 'react-router-dom'
 import Home from '../Home/Home'
-import HomeCarousel from '../../components/carousel/Homecarousel'
 
 const Courses = () => {
   return (
@@ -13,8 +12,6 @@ const Courses = () => {
     <div>
       <Navbar/>
       <Nav1/>
-      <HomeCarousel/>
-      <Footer/>
     </div>
      <Outlet />
     </div>

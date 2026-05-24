@@ -10,7 +10,7 @@ const Course = () => {
           <Link to="/studentlogin/dashboard"><button aria-label="Back to Dashboard">←</button></Link>
         </div>
         <div className="Container">Course Dashboard</div>
-        <p>Course content will be displayed here.</p>
+        <p></p>
       </div>
     </div>
   )
