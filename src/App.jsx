@@ -18,7 +18,7 @@ import Dashboard from "./Pages/userportal/Dashboard"
 import Attendance from "./Pages/Attendance/Attendance"
 import Course from "./Pages/course/Course"
 import Admin from "./Pages/admin/Admin"
-
+import Firstsem from "./Pages/Semesters/Firstsem"
 function App() {
   return (
     <BrowserRouter>
@@ -41,6 +41,7 @@ function App() {
       <Route path='/studentlogin/dashboard' element={<Dashboard/>}/>
       <Route path='/studentlogin/dashboard/attendance' element={<Attendance/>}/>
       <Route path='/studentlogin/dashboard/course' element={<Course/>}/>
+      <Route path='/studentlogin/dashboard/course/firstsemester' element={<Firstsem/>}/>
       <Route path='*' element={<div>Page not found</div>} />
     </Routes>
     
