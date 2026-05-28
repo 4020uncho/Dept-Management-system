@@ -8,13 +8,14 @@ import Home from '../Home/Home'
 
 const Courses = () => {
   return (
-    <div>
-    <div>
+    <>
       <Navbar/>
       <Nav1/>
-    </div>
-     <Outlet />
-    </div>
+      <main>
+        <Outlet />
+      </main>
+      <Footer/>
+    </>
   )
 }
 

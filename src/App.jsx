@@ -29,16 +29,20 @@ function App() {
       <Route path='/about' element={<About/>}/>
       <Route path='/hod' element={<HOD/>} />
       <Route path='/contact' element={<Contact/>}/>
-      <Route path='/courses' element={<Courses/>}/>
       <Route path='/admin' element={<Admin/>}/>
-      <Route path="/courses/firstsemester" element={<FirstSemester/>}/>
-      <Route path="/courses/secondsemester" element={<SecondSemester/>}/>
-      <Route path="/courses/thirdsemester" element={<ThirdSemester/>}/>
-      <Route path="/courses/fourthsemester" element={<FourthSemester />} />
-      <Route path="/courses/fifthsemester" element={<FifthSemester />} />
-      <Route path="/courses/sixthsemester" element={<SixthSemester />} />
-      <Route path="/courses/seventhsemester" element={<SeventhSemester />} />
-      <Route path="/courses/eighthsemester" element={<EighthSemester />} />
+      
+      {/* Nested Routes for Courses */}
+      <Route path='/courses' element={<Courses/>}>
+        <Route path='firstsemester' element={<FirstSemester/>}/>
+        <Route path='secondsemester' element={<SecondSemester/>}/>
+        <Route path='thirdsemester' element={<ThirdSemester/>}/>
+        <Route path='fourthsemester' element={<FourthSemester />} />
+        <Route path='fifthsemester' element={<FifthSemester />} />
+        <Route path='sixthsemester' element={<SixthSemester />} />
+        <Route path='seventhsemester' element={<SeventhSemester />} />
+        <Route path='eighthsemester' element={<EighthSemester />} />
+      </Route>
+      
       <Route path='/studentlogin' element={<Studentlogin/>}/>
       <Route path='/studentlogin/dashboard' element={<Dashboard/>}/>
       <Route path='/studentlogin/dashboard/attendance' element={<Attendance/>}/>

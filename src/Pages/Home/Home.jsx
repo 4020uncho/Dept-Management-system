@@ -26,11 +26,13 @@ const Home = () => {
 
       {/* Navbar sits below the header */}
       <Navbar />
-      <Marquee/>
-      <HomeCarousel/>
+      <main>
+        <Marquee/>
+        <HomeCarousel/>
+        <Outlet />
+        <Modal/>
+      </main>
       <Footer/>
-      <Outlet />
-      <Modal/>
     </>
   );
 };

@@ -20,16 +20,49 @@ const HomeCarousel = () => {
       className="carousel slide carousel-fade"
       data-bs-ride="carousel"
       data-bs-interval="3000"
+      style={{
+        maxWidth: "100%",
+        height: "500px",
+        overflow: "hidden",
+        marginBottom: "30px"
+      }}
     >
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img src={frontpage} className="d-block w-100" alt="Campus" />
+      <div className="carousel-inner" style={{ height: "100%" }}>
+        <div className="carousel-item active" style={{ height: "100%" }}>
+          <img 
+            src={frontpage} 
+            className="d-block w-100" 
+            alt="Campus"
+            style={{
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center"
+            }}
+          />
         </div>
-        <div className="carousel-item">
-          <img src={hod} className="d-block w-100" alt="HOD" />
+        <div className="carousel-item" style={{ height: "100%" }}>
+          <img 
+            src={hod} 
+            className="d-block w-100" 
+            alt="HOD"
+            style={{
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center"
+            }}
+          />
         </div>
-        <div className="carousel-item">
-          <img src={frontpage} className="d-block w-100" alt="Campus" />
+        <div className="carousel-item" style={{ height: "100%" }}>
+          <img 
+            src={frontpage} 
+            className="d-block w-100" 
+            alt="Campus"
+            style={{
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center"
+            }}
+          />
         </div>
       </div>
 

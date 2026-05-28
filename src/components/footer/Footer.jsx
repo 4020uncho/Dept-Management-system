@@ -9,7 +9,7 @@ const Footer = () => {
                 <div style={{
                   background: "#2a48bf",
                   color: "#ccc",
-                  padding: "40px 60px 20px",
+                  padding: "25px 40px 15px",
                 }}>
                   <div className="row">
          
