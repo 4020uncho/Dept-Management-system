@@ -21,6 +21,7 @@ import Admin from "./Pages/admin/Admin"
 import Firstsem from "./Pages/Semesters/Firstsem"
 import Secondsem from "./Pages/Semesters/Secondsem"
 import Thirdsem from "./Pages/Semesters/Thirdsem"
+import ProtectedRoute from "./Utils/ProtectedRoute"
 function App() {
   return (
     <BrowserRouter>
@@ -42,8 +43,9 @@ function App() {
         <Route path='seventhsemester' element={<SeventhSemester />} />
         <Route path='eighthsemester' element={<EighthSemester />} />
       </Route>
-      
+
       <Route path='/studentlogin' element={<Studentlogin/>}/>
+      <Route element={<ProtectedRoute/>}>
       <Route path='/studentlogin/dashboard' element={<Dashboard/>}/>
       <Route path='/studentlogin/dashboard/attendance' element={<Attendance/>}/>
       <Route path='/studentlogin/dashboard/course' element={<Course/>}/>
@@ -51,6 +53,7 @@ function App() {
       <Route path='/studentlogin/dashboard/course/secondsemester' element={<Secondsem/>}/>
       <Route path='/studentlogin/dashboard/course/thirdsemester' element={<Thirdsem/>}/>
       <Route path='*' element={<div>Page not found</div>} />
+      </Route>
     </Routes>
     
     </BrowserRouter>

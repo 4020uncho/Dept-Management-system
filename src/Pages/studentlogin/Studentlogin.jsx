@@ -7,6 +7,7 @@ const Studentlogin = () => {
     <div className="Container">
       <Navbar/>
       <Login/>
+      
     </div>
   )
 }

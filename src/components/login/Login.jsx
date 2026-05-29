@@ -37,12 +37,13 @@ const handleSubmit = async (e) => {
       
 
       if (!resp.ok) {
-        alert(data.message || "Login failed");
-        return;
-      }
+  alert(data.message || "Login failed");
+  return;
+}
 
-      alert("Login successful");
-      navigate("/studentlogin/dashboard");
+localStorage.setItem("token", data.token); // save auth state
+alert("Login successful");
+navigate("/studentlogin/dashboard");
     } catch (error) {
       console.error("Login request failed:", error);
       alert("Unable to send login request. Please try again.");

@@ -11,9 +11,7 @@ const Firstsem = () => {
             <button aria-label="Back to Dashboard">←</button>
           </Link>
         </div>
-        <div className="Container">First Semester</div>
-        <p>IIT  CSC-114</p>
-        <p> C- Programming  CSC-115</p>
+
       </div>
     </div>
   )
