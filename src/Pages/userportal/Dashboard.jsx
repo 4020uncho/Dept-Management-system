@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import Griddashboard from '../../components/dashboard/Griddashboard'
+import './Dashboard.css'
 
 const Dashbord =  () => {
+  const navigate = useNavigate()
 
  useEffect(() => {
   const fetchToken = async () => {
@@ -12,6 +15,11 @@ const Dashbord =  () => {
 
   fetchToken();
 }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/studentlogin')
+  }
 
   return (
     <div>
@@ -25,6 +33,7 @@ const Dashbord =  () => {
             <h2>Dashboard</h2>
             <p>Welcome to your dashboard!</p>
             <Griddashboard />
+            <button className='logout-button' onClick={handleLogout}>Logout</button>
           </div>
         </div>
       </div>
