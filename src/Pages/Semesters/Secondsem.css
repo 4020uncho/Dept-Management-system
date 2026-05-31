@@ -30,7 +30,7 @@
   flex-direction: column;
 }
 
-.firstsem-buttons {
+.Secondsem-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -38,7 +38,7 @@
 }
 
 /* Semester buttons: stacked, full-width, and grow to fill available space */
-.firstsem-buttons .semester-btn {
+.Secondsem-buttons .semester-btn {
   border-radius: 18px;
   padding: 12px 16px;
   border: 1px solid #ccc;
@@ -53,14 +53,14 @@
   flex: 1 1 0;
 }
 
-.firstsem-buttons .semester-btn:hover {
+.Secondsem-buttons .semester-btn:hover {
   background-color: #007bff;
   color: white;
   transform: translateY(-1px);
 }
 
 /* Back button: keep separate/unaffected by semester button styles */
-.firstsem-buttons .back-btn {
+.Secondsem-buttons .back-btn {
   align-self: flex-start;
   padding: 8px 10px;
   border-radius: 10px;
@@ -69,7 +69,7 @@
   color: inherit;
   cursor: pointer;
 }
-.firstsem-buttons button {
+.Secondsem-buttons button {
   border-radius: 18px;
   padding: 10px 16px;
   border: 1px solid #ccc;
@@ -79,7 +79,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   margin-bottom: 12px;
 }
-.firstsem-buttons button:hover {
+.Secondsem-buttons button:hover {
   background-color: #007bff;
   color: white;
   transform: translateY(-1px);
