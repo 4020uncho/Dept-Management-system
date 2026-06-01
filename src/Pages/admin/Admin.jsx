@@ -1,8 +1,11 @@
 import React from 'react'
+import Database from '../../Admin/Db/Database'
 
 const Admin = () => {
   return (
-    <div>Admin</div>
+    <div>
+      <Database />
+    </div>
   )
 }
 
