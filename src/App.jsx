@@ -5,6 +5,7 @@ import Courses from "./Pages/Courses/Courses"
 import About from "./Pages/About/About"
 import Contact from "./Pages/Contact/Contact"
 import Studentlogin from "./Pages/studentlogin/Studentlogin"
+import Administrator from "./Pages/Administrator/Administrator"
 import HOD from "./Pages/HOD/HOD"
 import FirstSemester from "./Pages/semester/Firstsemester"
 import SecondSemester from "./Pages/semester/Secondsemester"
@@ -31,6 +32,7 @@ function App() {
       <Route path='/hod' element={<HOD/>} />
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/admin' element={<Admin/>}/>
+      <Route path='/administrator' element={<Administrator/>}/>
       
       {/* Nested Routes for Courses */}
       <Route path='/courses' element={<Courses/>}>
