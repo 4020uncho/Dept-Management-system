@@ -38,9 +38,10 @@ const AdminLogin = () => {
         return
       }
 
-      localStorage.setItem('token', data.token)
+      localStorage.removeItem('token')
+      localStorage.setItem('admin_token', data.token)
       alert('Login successful')
-      navigate('/admin')
+      navigate('/control')
     } catch (error) {
       console.error('Login request failed:', error)
       alert('Unable to send login request. Please try again.')

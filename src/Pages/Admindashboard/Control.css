@@ -1,0 +1,94 @@
+.admin-dashboard-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #f6f9ff 0%, #eef4ff 100%);
+  color: #1f2937;
+}
+
+.admin-dashboard-header {
+  max-width: 900px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.admin-dashboard-header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.admin-dashboard-header p {
+  font-size: 1rem;
+  color: #475569;
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.admin-dashboard-card,
+.admin-dashboard-card button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  background: white;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin-dashboard-card:hover,
+.admin-dashboard-card:focus,
+.admin-dashboard-card button:hover,
+.admin-dashboard-card button:focus {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.25);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+}
+
+.admin-dashboard-card h2,
+.admin-dashboard-card button h2 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard-card p,
+.admin-dashboard-card button p {
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.admin-dashboard-logout {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  color: white;
+  border: none;
+}
+
+.admin-dashboard-logout:hover,
+.admin-dashboard-logout:focus {
+  transform: translateY(-4px);
+}
+
+@media (max-width: 640px) {
+  .admin-dashboard-page {
+    padding: 24px 16px;
+  }
+
+  .admin-dashboard-header h1 {
+    font-size: 2rem;
+  }
+}
+

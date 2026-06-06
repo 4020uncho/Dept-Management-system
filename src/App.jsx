@@ -6,6 +6,7 @@ import About from "./Pages/About/About"
 import Contact from "./Pages/Contact/Contact"
 import Studentlogin from "./Pages/studentlogin/Studentlogin"
 import Administrator from "./Pages/Administrator/Administrator"
+import Control from "./Pages/Admindashboard/Control"
 import HOD from "./Pages/HOD/HOD"
 import FirstSemester from "./Pages/semester/Firstsemester"
 import SecondSemester from "./Pages/semester/Secondsemester"
@@ -31,7 +32,6 @@ function App() {
       <Route path='/about' element={<About/>}/>
       <Route path='/hod' element={<HOD/>} />
       <Route path='/contact' element={<Contact/>}/>
-      <Route path='/admin' element={<Admin/>}/>
       <Route path='/administrator' element={<Administrator/>}/>
       
       {/* Nested Routes for Courses */}
@@ -47,15 +47,20 @@ function App() {
       </Route>
 
       <Route path='/studentlogin' element={<Studentlogin/>}/>
-      <Route element={<ProtectedRoute/>}>
-      <Route path='/studentlogin/dashboard' element={<Dashboard/>}/>
-      <Route path='/studentlogin/dashboard/attendance' element={<Attendance/>}/>
-      <Route path='/studentlogin/dashboard/course' element={<Course/>}/>
-      <Route path='/studentlogin/dashboard/course/firstsemester' element={<Firstsem/>}/>
-      <Route path='/studentlogin/dashboard/course/secondsemester' element={<Secondsem/>}/>
-      <Route path='/studentlogin/dashboard/course/thirdsemester' element={<Thirdsem/>}/>
-      <Route path='*' element={<div>Page not found</div>} />
+      <Route element={<ProtectedRoute redirectPath="/studentlogin" storageKey="token" />}>
+        <Route path='/studentlogin/dashboard' element={<Dashboard/>}/>
+        <Route path='/studentlogin/dashboard/attendance' element={<Attendance/>}/>
+        <Route path='/studentlogin/dashboard/course' element={<Course/>}/>
+        <Route path='/studentlogin/dashboard/course/firstsemester' element={<Firstsem/>}/>
+        <Route path='/studentlogin/dashboard/course/secondsemester' element={<Secondsem/>}/>
+        <Route path='/studentlogin/dashboard/course/thirdsemester' element={<Thirdsem/>}/>
+        <Route path='*' element={<div>Page not found</div>} />
       </Route>
+      <Route element={<ProtectedRoute redirectPath="/administrator" storageKey="admin_token" />}>
+        <Route path='/control' element={<Control/>}/>
+        <Route path='/admin' element={<Admin/>}/>
+      </Route>
+      
     </Routes>
     
     </BrowserRouter>

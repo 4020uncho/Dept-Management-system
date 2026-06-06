@@ -5,6 +5,7 @@ import AdminLogin from '../../components/login/AdminLogin'
 const Administrator = () => {
   useEffect(() => {
     localStorage.removeItem('token')
+    localStorage.removeItem('admin_token')
   }, [])
 
   return (
