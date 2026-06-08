@@ -24,6 +24,7 @@ import Firstsem from "./Pages/Semesters/Firstsem"
 import Secondsem from "./Pages/Semesters/Secondsem"
 import Thirdsem from "./Pages/Semesters/Thirdsem"
 import ProtectedRoute from "./Utils/ProtectedRoute"
+import Adminattendance from "./Pages/Administrator/Adminattendance"
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
       <Route path='/hod' element={<HOD/>} />
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/administrator' element={<Administrator/>}/>
+      <Route path='/administrator/attendance' element={<Adminattendance/>}/>
       
       {/* Nested Routes for Courses */}
       <Route path='/courses' element={<Courses/>}>
