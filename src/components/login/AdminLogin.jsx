@@ -19,7 +19,7 @@ const AdminLogin = () => {
     }
 
     try {
-      const resp = await fetch('http://localhost:5000/api/auth/login', {
+      const resp = await fetch('http://localhost:5000/api/admin/login-admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

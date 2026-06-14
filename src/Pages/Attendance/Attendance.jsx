@@ -1,37 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ADToBS } from "bikram-sambat-js";
 import "./Attendance.css";
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
-const STORAGE_KEY = "attendance_data";
 
 const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
-const loadData = () => {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-  } catch {
-    return {};
-  }
-};
+const API_BASE =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5000/api"
+    : "/api";
 
-const MONTHS = [
+const AD_MONTHS = [
   "January","February","March","April","May","June",
   "July","August","September","October","November","December",
 ];
 
-// ── Component ─────────────────────────────────────────────────────────────────
-// Props: studentId (string) — pass the logged-in student's ID
-const AttendanceStudent = ({ studentId = "s1" }) => {
-  const today = new Date();
-  const [month, setMonth] = useState(today.getMonth() + 1);
-  const [year,  setYear]  = useState(today.getFullYear());
+const STATUS_CLASS = { P: "cell-present", A: "cell-absent", L: "cell-leave" };
+const STATUS_LABEL = { P: "P", A: "A", L: "L" };
 
-  const data      = loadData();
-  const monthKey  = `${year}-${String(month).padStart(2, "0")}`;
-  const daysCount = getDaysInMonth(month, year);
-  const days      = Array.from({ length: daysCount }, (_, i) => i + 1);
-  const record    = data[monthKey]?.[studentId] ?? {};
+// ── BS Helpers ────────────────────────────────────────────────────────────────
+const adToBs = (adYear, adMonth, adDay = 1) => {
+  try {
+    const isoDate = `${adYear}-${String(adMonth).padStart(2, "0")}-${String(adDay).padStart(2, "0")}`;
+    const result = ADToBS(isoDate);
+    const [bsYear, bsMonth, bsDay] = result.split("-").map(Number);
+    const BS_MONTHS = [
+      "Baisakh","Jestha","Ashadh","Shrawan","Bhadra","Ashwin",
+      "Kartik","Mangsir","Poush","Magh","Falgun","Chaitra"
+    ];
+    return {
+      bsYear,
+      bsMonth,
+      bsDay,
+      bsMonthName: BS_MONTHS[bsMonth - 1],
+    };
+  } catch {
+    return null;
+  }
+};
+
+const getBSDay = (adYear, adMonth, adDay) => {
+  const bs = adToBs(adYear, adMonth, adDay);
+  return bs ? bs.bsDay : adDay;
+};
+
+// ── Component ─────────────────────────────────────────────────────────────────
+const AttendanceStudent = ({ studentId }) => {
+  const resolvedId = studentId || localStorage.getItem("userId");
+
+  const today = new Date();
+  const [month,   setMonth]   = useState(today.getMonth() + 1);
+  const [year,    setYear]    = useState(today.getFullYear());
+  const [record,  setRecord]  = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error,   setError]   = useState(null);
+
+  const daysCount    = getDaysInMonth(month, year);
+  const days         = Array.from({ length: daysCount }, (_, i) => i + 1);
+  const firstWeekday = new Date(year, month - 1, 1).getDay();
 
   const isWeekend = (day) => {
     const d = new Date(year, month - 1, day).getDay();
@@ -50,18 +76,66 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
   const total   = present + absent + leave;
   const pct     = total ? Math.round((present / total) * 100) : 0;
 
-  const STATUS_CLASS = { P: "cell-present", A: "cell-absent", L: "cell-leave" };
-  const STATUS_LABEL = { P: "P", A: "A", L: "L" };
+  // BS info for current month
+  const bsInfo    = adToBs(year, month, 1);
+  const todayBs   = adToBs(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
-  // Build calendar grid for month view
-  const firstWeekday = new Date(year, month - 1, 1).getDay(); // 0=Sun
-  const calDays = Array.from({ length: daysCount }, (_, i) => i + 1);
+  // ── Fetch attendance ───────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!resolvedId) {
+      setError("Student ID not found. Please log in again.");
+      return;
+    }
 
+    let active = true;
+
+    const fetchAttendance = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${API_BASE}/attendance/student/${resolvedId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        });
+
+        if (!res.ok) {
+          const json = await res.json().catch(() => ({}));
+          throw new Error(json.message || `HTTP ${res.status}`);
+        }
+
+        const payload = await res.json();
+
+        const map = {};
+        (payload.attendance || []).forEach((a) => {
+          const d = new Date(a.date);
+          if (d.getFullYear() === year && d.getMonth() + 1 === month) {
+            map[d.getDate()] = a.status;
+          }
+        });
+
+        if (active) setRecord(map);
+      } catch (err) {
+        console.error("Fetch attendance error:", err);
+        if (active) setError(err.message || "Error fetching attendance");
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+
+    fetchAttendance();
+    return () => { active = false; };
+  }, [resolvedId, month, year]);
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="att-page">
       <div className="att-container">
 
-        {/* ── Header ── */}
+        {/* Header */}
         <div className="att-header">
           <div className="att-header-left">
             <Link to="/studentlogin/dashboard" className="att-back-btn">
@@ -69,7 +143,9 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
             </Link>
             <div>
               <h1 className="att-title">My Attendance</h1>
-              <p className="att-subtitle">{MONTHS[month - 1]} {year}</p>
+              <p className="att-subtitle">
+                {bsInfo ? `${bsInfo.bsMonthName} ${bsInfo.bsYear} BS` : `${AD_MONTHS[month - 1]} ${year}`}
+              </p>
             </div>
           </div>
           <div className="att-header-right">
@@ -78,23 +154,42 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
               value={month}
               onChange={(e) => setMonth(Number(e.target.value))}
             >
-              {MONTHS.map((m, i) => (
-                <option key={i} value={i + 1}>{m}</option>
-              ))}
+              {AD_MONTHS.map((m, i) => {
+                const bs = adToBs(year, i + 1, 1);
+                return (
+                  <option key={i} value={i + 1}>
+                    {bs ? `${bs.bsMonthName} (${m})` : m}
+                  </option>
+                );
+              })}
             </select>
             <select
               className="att-select"
               value={year}
               onChange={(e) => setYear(Number(e.target.value))}
             >
-              {[2023, 2024, 2025, 2026, 2027].map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
+              {[2023, 2024, 2025, 2026, 2027].map((y) => {
+                const bs = adToBs(y, 1, 1);
+                return (
+                  <option key={y} value={y}>
+                    {y} {bs ? `(${bs.bsYear} BS)` : ""}
+                  </option>
+                );
+              })}
             </select>
+            {loading && <div className="att-loading">Loading…</div>}
+            {error   && <div className="att-error">{error}</div>}
           </div>
         </div>
 
-        {/* ── Summary Cards ── */}
+        {/* Today in BS */}
+        {todayBs && (
+          <div className="bs-today-banner">
+            Today: {todayBs.bsDay} {todayBs.bsMonthName} {todayBs.bsYear} BS
+          </div>
+        )}
+
+        {/* Summary Cards */}
         <div className="stats-grid">
           <div className="stat-card stat-card-present">
             <span className="stat-num">{present}</span>
@@ -111,31 +206,36 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
           <div className={`stat-card stat-card-pct ${pct >= 75 ? "pct-good-card" : pct >= 60 ? "pct-warn-card" : "pct-bad-card"}`}>
             <span className="stat-num">{pct}%</span>
             <span className="stat-lbl">Attendance</span>
-            {pct < 75 && <span className="pct-warning-badge">Below 75%</span>}
+            {pct < 75 && total > 0 && (
+              <span className="pct-warning-badge">Below 75%</span>
+            )}
           </div>
         </div>
 
-        {/* ── Calendar View ── */}
+        {/* Calendar */}
         <div className="cal-section">
-          <h2 className="cal-heading">Calendar</h2>
+          <h2 className="cal-heading">
+            {bsInfo ? `${bsInfo.bsMonthName} ${bsInfo.bsYear}` : `${AD_MONTHS[month - 1]} ${year}`}
+          </h2>
           <div className="cal-grid">
             {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((d) => (
               <div key={d} className="cal-day-header">{d}</div>
             ))}
-            {/* Empty offset cells */}
             {Array.from({ length: firstWeekday }).map((_, i) => (
               <div key={`empty-${i}`} className="cal-cell cal-empty" />
             ))}
-            {calDays.map((day) => {
-              const status = record[day];
-              const weekend = isWeekend(day);
+            {days.map((day) => {
+              const status    = record[day];
+              const weekend   = isWeekend(day);
               const todayMark = isToday(day);
+              const bsDay     = getBSDay(year, month, day);
               return (
                 <div
                   key={day}
                   className={`cal-cell ${status ? STATUS_CLASS[status] : ""} ${weekend ? "cal-weekend" : ""} ${todayMark ? "cal-today" : ""}`}
                 >
-                  <span className="cal-day-num">{day}</span>
+                  <span className="cal-day-num">{bsDay}</span>
+                  <span className="cal-day-ad">({day})</span>
                   {status && !weekend && (
                     <span className="cal-status">{STATUS_LABEL[status]}</span>
                   )}
@@ -145,7 +245,7 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
           </div>
         </div>
 
-        {/* ── Legend ── */}
+        {/* Legend */}
         <div className="att-legend">
           <span className="legend-item"><span className="legend-dot present" />Present</span>
           <span className="legend-item"><span className="legend-dot absent"  />Absent</span>
@@ -153,7 +253,7 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
           <span className="legend-item"><span className="legend-dot weekend" />Weekend</span>
         </div>
 
-        {/* ── Row Table (compact) ── */}
+        {/* Detailed Table */}
         <details className="row-table-details">
           <summary className="row-table-summary">Show detailed table view</summary>
           <div className="table-scroll" style={{ marginTop: "16px" }}>
@@ -165,9 +265,12 @@ const AttendanceStudent = ({ studentId = "s1" }) => {
                       key={d}
                       className={`col-day ${isWeekend(d) ? "weekend-col" : ""} ${isToday(d) ? "today-col" : ""}`}
                     >
-                      <div>{d}</div>
+                      <div>{getBSDay(year, month, d)}</div>
+                      <div className="ad-day">({d})</div>
                       <div className="day-name">
-                        {new Date(year, month - 1, d).toLocaleDateString("en", { weekday: "short" }).slice(0, 2)}
+                        {new Date(year, month - 1, d)
+                          .toLocaleDateString("en", { weekday: "short" })
+                          .slice(0, 2)}
                       </div>
                     </th>
                   ))}

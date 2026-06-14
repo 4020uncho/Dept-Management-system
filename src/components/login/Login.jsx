@@ -19,7 +19,7 @@ const handleSubmit = async (e) => {
     }
 
     try {
-      const resp = await fetch("http://localhost:5000/api/auth/login", {
+      const resp = await fetch("http://localhost:5000/api/students/login-student", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
