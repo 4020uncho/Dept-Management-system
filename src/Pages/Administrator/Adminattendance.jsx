@@ -67,7 +67,13 @@ const AdminAttendance = () => {
   useEffect(() => {
     const loadStudents = async () => {
       try {
-        const res  = await fetch(`${API}/students/all-students`);
+        const token=localStorage.getItem("admin_token");
+        const res  = await fetch(`${API}/students/all-students`, {
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          }
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         const raw  = json.students ?? json.data ?? json ?? [];
@@ -89,7 +95,13 @@ const AdminAttendance = () => {
   // ── Load attendance ────────────────────────────────────────────────────────
   const loadAttendance = useCallback(async () => {
     try {
-      const res  = await fetch(`${API}/attendance/month?month=${month}&year=${year}`);
+      const token=localStorage.getItem("admin_token");
+      const res  = await fetch(`${API}/attendance/month?month=${month}&year=${year}`, {
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        }
+      });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       const incoming = {};
@@ -131,6 +143,7 @@ const AdminAttendance = () => {
     setSaving(true);
     setError("");
     try {
+      const token=localStorage.getItem("admin_token");
       const requests = [];
       students.forEach(({ id }) => {
         const studentDays = data[id] ?? {};
@@ -140,7 +153,10 @@ const AdminAttendance = () => {
           requests.push(
             fetch(`${API}/attendance/mark`, {
               method:  "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: { 
+                "Content-Type": "application/json",
+                ...(token ? { Authorization: `Bearer ${token}` } : {})
+              },
               body:    JSON.stringify({ userId: id, date: buildDateStr(day), status }),
             })
           );
@@ -180,7 +196,10 @@ const AdminAttendance = () => {
       const requests = students.map(({ id }) =>
         fetch(`${API}/attendance/mark`, {
           method:  "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {})
+          },
           body:    JSON.stringify({ userId: id, date: dateStr, status }),
         })
       );

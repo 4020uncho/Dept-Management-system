@@ -42,6 +42,10 @@ const handleSubmit = async (e) => {
 }
 
 localStorage.setItem("token", data.token); // save auth state
+localStorage.setItem("userId", data.student._id);        // ← for attendance fetch
+localStorage.setItem("userName", data.student.name);      // ← optional display
+localStorage.setItem("student", JSON.stringify(data.student)); // ← full object
+
 alert("Login successful");
 navigate("/studentlogin/dashboard");
     } catch (error) {

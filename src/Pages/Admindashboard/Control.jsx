@@ -39,6 +39,13 @@ const Control = () => {
           </div>
         </Link>
 
+         <Link className='admin-dashboard-card' to='/Adminattendance'>
+          <div>
+            <h2>Attendance Management</h2>
+            <p>View and manage student attendance records for each course.</p>
+          </div>
+        </Link>
+
         <button className='admin-dashboard-card admin-dashboard-logout' onClick={handleLogout}>
           <div>
             <h2>Logout</h2>

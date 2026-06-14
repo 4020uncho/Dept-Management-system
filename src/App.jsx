@@ -34,7 +34,6 @@ function App() {
       <Route path='/hod' element={<HOD/>} />
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/administrator' element={<Administrator/>}/>
-      <Route path='/administrator/attendance' element={<Adminattendance/>}/>
       
       {/* Nested Routes for Courses */}
       <Route path='/courses' element={<Courses/>}>
@@ -61,6 +60,7 @@ function App() {
       <Route element={<ProtectedRoute redirectPath="/administrator" storageKey="admin_token" />}>
         <Route path='/control' element={<Control/>}/>
         <Route path='/admin' element={<Admin/>}/>
+        <Route path='/Adminattendance' element={<Adminattendance/>}/>
       </Route>
       
     </Routes>
