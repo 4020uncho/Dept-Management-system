@@ -45,6 +45,13 @@ const Control = () => {
             <p>View and manage student attendance records for each course.</p>
           </div>
         </Link>
+        
+        <Link className='admin-dashboard-card' to='/upload'>
+          <div>
+            <h2>Result Upload</h2>
+            <p>View and manage student results for each course.</p>
+          </div>
+        </Link>
 
         <button className='admin-dashboard-card admin-dashboard-logout' onClick={handleLogout}>
           <div>

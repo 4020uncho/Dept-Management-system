@@ -20,6 +20,7 @@ import Dashboard from "./Pages/userportal/Dashboard"
 import Attendance from "./Pages/Attendance/Attendance"
 import Course from "./Pages/course/Course"
 import Admin from "./Pages/admin/Admin"
+import Upload from "./Pages/Upload/upload"
 import Firstsem from "./Pages/Semesters/Firstsem"
 import Secondsem from "./Pages/Semesters/Secondsem"
 import Thirdsem from "./Pages/Semesters/Thirdsem"
@@ -61,6 +62,7 @@ function App() {
         <Route path='/control' element={<Control/>}/>
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/Adminattendance' element={<Adminattendance/>}/>
+        <Route path='/upload' element={<Upload/>}/>
       </Route>
       
     </Routes>
