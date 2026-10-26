@@ -26,6 +26,7 @@ import Secondsem from "./Pages/Semesters/Secondsem"
 import Thirdsem from "./Pages/Semesters/Thirdsem"
 import ProtectedRoute from "./Utils/ProtectedRoute"
 import Adminattendance from "./Pages/Administrator/Adminattendance"
+import MarqueeAdmin from "./components/marquee/MarqueeAdmin"
 function App() {
   return (
     <BrowserRouter>
@@ -63,6 +64,7 @@ function App() {
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/Adminattendance' element={<Adminattendance/>}/>
         <Route path='/upload' element={<Upload/>}/>
+        <Route path='/MarqueeAdmin' element={<MarqueeAdmin/>}/>
       </Route>
       
     </Routes>

@@ -1,24 +1,31 @@
-import React from 'react'
-import './Marquee.css'
+import React, { useState, useEffect } from "react";
+import "./Marquee.css";
+
+const API = "http://localhost:5000";
 
 const Marquee = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/api/marquee`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.active) setItems(data.items || []);
+      })
+      .catch(() => {});
+  }, []);
+
+  if (!items || items.length === 0) return <div className="marquee">&nbsp;</div>;
+
   return (
     <div className="marquee">
       <div className="track">
-        <span>1. 5th semester exam starts &nbsp;</span>
-        <span>2. Summer vacation notice  &nbsp;</span>
-        <span>3. Please check back later for updates &nbsp;</span>
-        <span>4. We are working hard to bring you the best experience &nbsp;</span>
-        <span>5. Stay tuned for exciting news and announcements &nbsp;</span>
-        <span>6. Thank you for your patience and support &nbsp;</span>
-
-        
-        <span>1. 5th semester exam starts &nbsp;</span>
-        <span>2. Summer vacation notice  &nbsp;</span>
-        <span>3. Please check back later for updates &nbsp;</span>
-        <span>4. We are working hard to bring you the best experience &nbsp;</span>
-        <span>5. Stay tuned for exciting news and announcements &nbsp;</span>
-        <span>6. Thank you for your patience and support &nbsp;</span>
+        {/* rendered twice so the CSS loop stays seamless */}
+        {[...items, ...items].map((text, i) => (
+          <span key={i}>
+            {(i % items.length) + 1}. {text} &nbsp;
+          </span>
+        ))}
       </div>
     </div>
   );

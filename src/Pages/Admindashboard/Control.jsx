@@ -53,6 +53,13 @@ const Control = () => {
           </div>
         </Link>
 
+        <Link className='admin-dashboard-card' to='/MarqueeAdmin'>
+          <div>
+            <h2>MarqueeAdmin</h2>
+            <p>Update the scrolling marquee text displayed on the portal homepage.</p>
+          </div>
+        </Link>
+
         <button className='admin-dashboard-card admin-dashboard-logout' onClick={handleLogout}>
           <div>
             <h2>Logout</h2>
